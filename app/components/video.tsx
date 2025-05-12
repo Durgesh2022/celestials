@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -64,7 +64,7 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 
 export default function WellnessLandingPage() {
   // You can replace this URL with your YouTube or Google Drive video link
-  const [videoUrl, setVideoUrl] = useState<string>('https://www.youtube.com/watch?v=thMT8W6qAwg');
+  const [videoUrl] = useState<string>('https://www.youtube.com/watch?v=thMT8W6qAwg');
   
   return (
     <div className=" bg-white">
