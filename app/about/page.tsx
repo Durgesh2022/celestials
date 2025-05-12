@@ -15,7 +15,7 @@ import FAQs from '../components/faq';
 // import ContactForm from '../components/contactform';
 // import NewsletterSubscription from '../components/newsletter';
 // import Header2 from '../components/header2';
-import WellnessLandingPage from '../components/video';
+import WellnessLandingPage2 from '../components/video2';
 
 // Initialize the font
 
@@ -33,7 +33,7 @@ export default function Home() {
        {/* <Layout /> 
    
        <EnrollPage /> */}
-       <WellnessLandingPage />
+       <WellnessLandingPage2 />
       {/* <Team /> */}
        
       {/* <Testimonial />
