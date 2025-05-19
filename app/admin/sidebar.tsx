@@ -22,10 +22,10 @@ interface SidebarItemProps {
   collapsed?: boolean;
 }
 
-interface TabButtonProps {
-  label: string;
-  active?: boolean;
-}
+// interface TabButtonProps {
+//   label: string;
+//   active?: boolean;
+// }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ icon, label, href, active, collapsed }) => {
   return (
@@ -38,13 +38,13 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, label, href, active, co
   );
 }
 
-const TabButton: React.FC<TabButtonProps> = ({ label, active }) => {
-  return (
-    <button className={`px-6 py-3 text-sm font-medium ${active ? 'border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}>
-      {label}
-    </button>
-  );
-}
+// const TabButton: React.FC<TabButtonProps> = ({ label, active }) => {
+//   return (
+//     <button className={`px-6 py-3 text-sm font-medium ${active ? 'border-b-2 border-gray-900' : 'text-gray-500 hover:text-gray-700'}`}>
+//       {label}
+//     </button>
+//   );
+// }
 
 const Sidebar = ({ isOpen, setIsOpen, showToggleButton = true })  => {
  

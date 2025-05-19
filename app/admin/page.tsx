@@ -1,27 +1,27 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Sidebar from './sidebar';
 import SalesAreaChart from './salechart';
 
 import { 
   BellIcon, 
-  ChartBarIcon, 
-  Cog6ToothIcon as CogIcon, 
-  DocumentTextIcon, 
-  HomeIcon, 
-  InboxIcon, 
-  QuestionMarkCircleIcon, 
-  ShoppingBagIcon, 
-  UserIcon, 
-  WalletIcon,
+  // ChartBarIcon, 
+  // Cog6ToothIcon as CogIcon, 
+  // DocumentTextIcon, 
+  // HomeIcon, 
+  // InboxIcon, 
+  // QuestionMarkCircleIcon, 
+  // ShoppingBagIcon, 
+  // UserIcon, 
+  // WalletIcon,
   CalendarIcon,
-  PlusCircleIcon,
-  ChevronRightIcon,
+  // PlusCircleIcon,
+  // ChevronRightIcon,
   Bars3Icon,
-  XMarkIcon
+  // XMarkIcon
 } from '@heroicons/react/24/outline';
 
 // Properly import the LineChart component
@@ -56,8 +56,8 @@ const Analytics: React.FC = () => {
   }, []);
 
   // Sample data for the chart
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const salesData = [500, 700, 1200, 1800, 2200, 2700, 1000, 3200, 3400, 1600, 3900, 4200];
+  // const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  // const salesData = [500, 700, 1200, 1800, 2200, 2700, 1000, 3200, 3400, 1600, 3900, 4200];
 
   const [currentDate, setCurrentDate] = useState("");
 
