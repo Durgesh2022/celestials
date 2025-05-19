@@ -45,8 +45,14 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, label, href, active, co
 //     </button>
 //   );
 // }
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  showToggleButton?: boolean;
+}
 
-const Sidebar = ({ isOpen, setIsOpen, showToggleButton = true })  => {
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, showToggleButton = true })  => {
  
   const [isMobile, setIsMobile] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
