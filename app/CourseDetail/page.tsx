@@ -47,7 +47,7 @@ const AboutCourse = () => {
                     <li>Byosen Scanning – detecting where Reiki is needed</li>
                     <li>Gyoshi ho – sending Reiki with the eyes</li>
                     <li>Koki ho – using the breath to send Reiki</li>
-                    <li>Kenyoku – dry bathing or clearing one's energy field</li>
+                    <li>Kenyoku – dry bathing or clearing one&apos;s energy field</li>
                     <li>Jacki-kiri Joka-ho – clearing objects of negative energy</li>
                   </ul>
                 </li>

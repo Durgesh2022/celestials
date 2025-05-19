@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 // import Link from 'next/link';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import Sidebar from './sidebar';
 import SalesAreaChart from './salechart';
 
