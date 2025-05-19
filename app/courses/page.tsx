@@ -16,7 +16,7 @@ import Team from '../components/team';
 // import NewsletterSubscription from '../components/newsletter';
 // import Header2 from '../components/header2';
 import WellnessLandingPage from '../components/video';
-import Enroll2 from '../components/enroll2';
+import Enroll2 from '../components/courses';
 
 // Initialize the font
 
