@@ -25,10 +25,10 @@ import {
 } from '@heroicons/react/24/outline';
 
 // Properly import the LineChart component
-const DynamicLineChart = dynamic(
-  () => import('@mui/x-charts').then((mod) => mod.LineChart),
-  { ssr: false, loading: () => <p>Loading chart...</p> }
-);
+// const DynamicLineChart = dynamic(
+//   () => import('@mui/x-charts').then((mod) => mod.LineChart),
+//   { ssr: false, loading: () => <p>Loading chart...</p> }
+// );
 
 interface TabButtonProps {
   label: string;
@@ -45,15 +45,15 @@ const TabButton: React.FC<TabButtonProps> = ({ label, active }) => {
 
 const Analytics: React.FC = () => {
   // State to track if we're on the client side
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
   
   // State for mobile sidebar
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
   // Effect to set isClient to true when component mounts on client
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
   // Sample data for the chart
   // const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -120,7 +120,7 @@ const Analytics: React.FC = () => {
               
               <div>
                 <h1 className="text-3xl font-bold">Good morning, <span className="text-[#4A1A11] font-bold">Jonathan</span>!</h1>
-                <p className="text-sm text-gray-500 hidden sm:block">Here's the latest from your store today!</p>
+                <p className="text-sm text-gray-500 hidden sm:block">Here&apos;s the latest from your store today!</p>
               </div>
             </div>
             
