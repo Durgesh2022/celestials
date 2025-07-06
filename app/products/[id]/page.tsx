@@ -1,8 +1,7 @@
-// import { Metadata } from 'next';
 import Image from "next/image";
 import { Product } from "../../types/product";
 
-// Fetch product
+// 👇 Fetching logic
 async function getProduct(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`, {
@@ -19,7 +18,7 @@ async function getProduct(id: string): Promise<Product | null> {
   }
 }
 
-// ✅ Correct type from Next.js
+// 👇 Page component
 export default async function ProductPage({
   params,
 }: {
@@ -34,7 +33,6 @@ export default async function ProductPage({
       </div>
     );
   }
-
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
       <div className="min-h-screen p-6 ">
