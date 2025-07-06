@@ -87,7 +87,7 @@ const CourseForm = () => {
       body: JSON.stringify(courseData),
     });
 
-    const result = await res.json();
+     await res.json();
 
     if (res.ok) {
       setSuccessMessage("🎉 Course added successfully!");
