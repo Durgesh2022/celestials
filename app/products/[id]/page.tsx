@@ -1,56 +1,53 @@
-export const dynamic = "force-dynamic";
-import { Product } from "../../types/product";
-import Image from "next/image";
+'use client';
 
-// type Props = {
-//   params: {
-//     id: string;
-//   };
-// };
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
-async function getProduct(id: string): Promise<Product | null> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`, {
-      cache: "no-store",
-    });
-    if (!res.ok) return null;
+type Product = {
+  _id: string;
+  name: string;
+  description: string;
+  deliveryInfo: string;
+  onSale: string; // or 'Yes' | 'No'
+  priceDrop: number;
+  price: number;
+  imageUrls: string[];
+};
 
-    const data = await res.json();
-    return data.product;
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return null;
-  }
-}
+const ProductClient = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
 
-// ✅ Async function gets { params } directly
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const res = await fetch(`/api/products/${id}`);
+      const data = await res.json();
+      if (res.ok) setProduct(data.product);
+    };
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
+    if (id) fetchProduct();
+  }, [id]);
+
+  if (!product) return <p className="p-10 text-center">Loading...</p>;
+
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
       <div className="min-h-screen p-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left side: images */}
+          {/* Left: images */}
           <div className="flex flex-row space-x-12">
             <div className="flex flex-col space-y-3">
-              <Image
-                src={product.imageUrls[0]}
-                alt={product.name}
-                width={80}
-                height={80}
-                className="rounded shadow"
-              />
-              <Image
-                src={product.imageUrls[0]}
-                alt={product.name}
-                width={80}
-                height={80}
-                className="rounded shadow"
-              />
+              {product.imageUrls.map((img, i) => (
+                <Image
+                  key={i}
+                  src={img}
+                  alt={product.name}
+                  width={80}
+                  height={80}
+                  className="rounded shadow"
+                />
+              ))}
             </div>
             <Image
               src={product.imageUrls[0]}
@@ -61,13 +58,13 @@ export default async function ProductPage({ params }: { params: { id: string } }
             />
           </div>
 
-          {/* Right side: product info */}
+          {/* Right: info */}
           <div>
             <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
             <div className="mt-4 flex items-center space-x-3">
-              {product.onSale === "Yes" && (
+              {product.onSale === 'Yes' && (
                 <span className="text-2xl font-semibold line-through text-gray-500">
-                  ₹{product.priceDrop + 50}
+                  ₹{product.price}
                 </span>
               )}
               <span className="text-2xl font-bold text-red-600">
@@ -92,4 +89,6 @@ export default async function ProductPage({ params }: { params: { id: string } }
       </div>
     </div>
   );
-}
+};
+
+export default ProductClient;
