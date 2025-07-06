@@ -3,13 +3,19 @@ import { connectToDatabase } from "@/lib/mongodb";
 import Product from "@/models/Product";
 
 // GET: Get a product by ID
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
-    const product = await Product.findById(params.id);
+
+    const id = req.nextUrl.pathname.split("/").pop();
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Missing product ID" },
+        { status: 400 }
+      );
+    }
+
+    const product = await Product.findById(id);
 
     if (!product) {
       return NextResponse.json(
@@ -29,13 +35,19 @@ export async function GET(
 }
 
 // DELETE: Delete a product by ID
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest) {
   try {
     await connectToDatabase();
-    const deletedProduct = await Product.findByIdAndDelete(params.id);
+
+    const id = req.nextUrl.pathname.split("/").pop();
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Missing product ID" },
+        { status: 400 }
+      );
+    }
+
+    const deletedProduct = await Product.findByIdAndDelete(id);
 
     if (!deletedProduct) {
       return NextResponse.json(
