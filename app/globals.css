@@ -96,3 +96,77 @@ body {
     --gradient-angle: 360deg;
   }
 }
+
+
+
+@font-face {
+  font-family: 'Abbasy Calligraphy Typeface';
+  src: url('/fonts/AbbasyCalligraphyTypeface.woff2') format('woff2'),
+       url('/fonts/AbbasyCalligraphyTypeface.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bolina';
+  src: url('/fonts/Bolina.woff2') format('woff2'),
+       url('/fonts/Bolina.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LT Perfume';
+  src: url('/fonts/LTPerfume-Regular.woff2') format('woff2'),
+       url('/fonts/LTPerfume-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Love Script';
+  src: url('/fonts/Lovescript.woff2') format('woff2'),
+       url('/fonts/Lovescript.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'a Antara Distance';
+  src: url('/fonts/aAntaraDistance.woff2') format('woff2'),
+       url('/fonts/aAntaraDistance.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Champignon Alt Swash';
+  src: url('/fonts/ChampignonAltSwash.woff2') format('woff2'),
+       url('/fonts/ChampignonAltSwash.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Master Of Break';
+  src: url('/fonts/MasterOfBreak.woff2') format('woff2'),
+       url('/fonts/MasterOfBreak.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Selima';
+  src: url('/fonts/Selima.woff2') format('woff2'),
+       url('/fonts/Selima.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

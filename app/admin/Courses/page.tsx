@@ -1,5 +1,5 @@
 import CourseSection from "./CourseSection";
-import { Product } from "../types/product2";
+import { Product } from "../../types/product2";
 
 async function getCourses(): Promise<Product[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/courses`, {

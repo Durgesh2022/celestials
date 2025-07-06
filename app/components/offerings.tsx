@@ -43,9 +43,9 @@ const Carousel = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
     <div className="flex flex-col w-full min-h-[800px]  flex justify-center items-center p-8 md:p-10">
-      <h1 className="text-6xl font-bold mb-4 text-[#4D5557] text-center" style={{ fontFamily: "'CelestialFont', Petrona, serif",}}>Our Offerings</h1>
+      <h1 className="text-6xl font-bold mb-4 text-[#4D5557] text-center" style={{ fontFamily: 'Master Of Break',  fontWeight: "400",}}>Our Offerings</h1>
       
-      <p className="mb-12 text-lg text-[#4A1A11] text-center">
+      <p className="mb-12 text-3xl text-[#4A1A11] text-center"  style={{  fontFamily: 'a Antara Distance',fontWeight: "400",}}>
         A wide range of services are provided to help you understand yourself better and make
         better decisions in life.
       </p>
@@ -74,8 +74,8 @@ const Carousel = () => {
         </div>
 
         <div className="w-full md:w-3/5 p-4 md:p-0 md:pr-8 text-left flex flex-col justify-center">
-          <h2 className="text-5xl text-[#4A1A11] font-bold mb-2" style={{ fontFamily: "'CelestialFont', Petrona, serif",}}>{products[activeIndex].name}</h2>
-          <p className="text-gray-700 mb-4">{products[activeIndex].description}</p>
+          <h2 className="text-5xl text-[#4A1A11] font-bold mb-2" style={{ fontFamily: 'Master Of Break',  fontWeight: "400",}}>{products[activeIndex].name}</h2>
+          <p className="text-gray-700 mb-4 text-lg" >{products[activeIndex].description}</p>
 
           
 

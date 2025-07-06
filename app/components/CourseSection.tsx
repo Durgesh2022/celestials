@@ -13,7 +13,7 @@ const CourseSection = ({ products }: Props) => {
       <h1 className="text-5xl font-bold mb-6 text-[#4D5557] text-center" style={{ fontFamily: "'CelestialFont', Petrona, serif",}}>Our Products</h1>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
         {products.map((product) => (
-          <CourseCard key={product.id} product={product} />
+          <CourseCard key={product._id} product={product} />
         ))}
       </div>
     </section>

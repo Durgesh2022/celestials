@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Product } from "../types/product2";
+import { Product } from "../../types/product2";
 
 type Props = {
   product: Product;

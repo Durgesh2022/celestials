@@ -19,34 +19,36 @@ export default function header2() {
           width: '686px',
           height: '686px',
           top: '30px',
-          left: '-170px',
+          left: '-110px',
           animationDelay: '0s',
         }}
       />
   
         {/* Image at x: -17px, y: 369px */}
         <img
-          src="/man.png"
+          src="/women3.png"
           alt="Decorative"
           className="absolute z-10 pop-up"
           style={{
-            width: '319px',
+            width: '489px',
             height: '506px',
             top: '190px',
-            left: '10px',
+            left: '-3px',
             animationDelay: '0.4s',
           }}
         />
         <div>
           {/* Heading */}
       <h1
-        className="font-celestial absolute z-20 text-8xl font-bold text-[#4D5557] leading-tight"
+        className="font-celestial absolute z-20 text-9xl font-bold text-[#4D5557] leading-tight"
         style={{
-          top: '235px',
+          top: '185px',
           left: '409px',
-          width: '700px',
+          width: '900px',
           height: '200px',
-           fontFamily: "'CelestialFont', Petrona, serif",
+           fontFamily: 'Master Of Break',
+           fontWeight: "400",
+           
         }}
       >
         Welcome to
@@ -56,25 +58,29 @@ Celestial healing.
 
       {/* Paragraph */}
       <p
-        className="absolute z-20 text-xl text-[#4A1A11]"
+        className="absolute z-20 text-3xl text-[#4A1A11]"
         style={{
           top: '500px',
           left: '425px',
           width: '900px',
           height: '105px',
+           fontFamily: 'a Antara Distance',
+           fontWeight: "400",
         }}
       >
         Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
       </p>
       {/* Button */}
 <button
-  className="absolute z-20 mt-4 px-6 py-3 text-l font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300"
+  className="absolute z-20 mt-4 px-6 py-3 text-3xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300"
   style={{
     top: '570px',
     left: '425px',
+     fontFamily: 'a Antara Distance',
+    fontWeight: "400",
   }}
 >
-START YOUR JOURNEY
+Start Your Journey
 </button>
       </div>
       <img
@@ -85,7 +91,7 @@ START YOUR JOURNEY
           width: '180px',
           height: '220px',
           top: '40px',
-          right: '185px',
+          right: '65px',
           animationDelay: '0.2s',
         }}
       />
@@ -98,7 +104,7 @@ START YOUR JOURNEY
           width: '152px',
           height: '229px',
           top: '220px',
-          right: '225px',
+          right: '105px',
           animationDelay: '0.6s',
         }}
       />
@@ -110,7 +116,7 @@ START YOUR JOURNEY
           width: '180px',
           height: '220px',
           top: '110px',
-          right: '335px',
+          right: '215px',
           animationDelay: '0.4s',
         }}
       />
