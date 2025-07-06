@@ -1,5 +1,5 @@
-// app/products/[id]/page.tsx
-import { Product } from "../../types/product"; // adjust path as needed
+export const dynamic = "force-dynamic";
+import { Product } from "../../types/product";
 import Image from "next/image";
 
 type Props = {
@@ -23,13 +23,13 @@ async function getProduct(id: string): Promise<Product | null> {
   }
 }
 
-export default async function ProductPage({ params }: Props) {
+// ✅ Async function gets { params } directly
+export default async function ProductPage({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
 
   if (!product) {
     return <div>Product not found</div>;
   }
-
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
       <div className="min-h-screen p-6">
