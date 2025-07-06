@@ -1,6 +1,6 @@
-import { Metadata } from "next";
+// app/products/[id]/page.tsx
+import { Product } from "../../types/product"; // adjust path as needed
 import Image from "next/image";
-import { Product } from "../../types/product";
 
 type Props = {
   params: {
@@ -8,14 +8,6 @@ type Props = {
   };
 };
 
-// Dynamic metadata (optional)
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return {
-    title: `Product ${params.id}`,
-  };
-}
-
-// Fetch product
 async function getProduct(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`, {
@@ -72,7 +64,6 @@ export default async function ProductPage({ params }: Props) {
           {/* Right side: product info */}
           <div>
             <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
-
             <div className="mt-4 flex items-center space-x-3">
               {product.onSale === "Yes" && (
                 <span className="text-2xl font-semibold line-through text-gray-500">
