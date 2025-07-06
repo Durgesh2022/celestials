@@ -1,13 +1,12 @@
 import Image from "next/image";
 import { Product } from "../../types/product";
 
-// 👇 Fetching logic
+// Fetch product
 async function getProduct(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/${id}`, {
       cache: "no-store",
     });
-
     if (!res.ok) return null;
 
     const data = await res.json();
@@ -18,7 +17,7 @@ async function getProduct(id: string): Promise<Product | null> {
   }
 }
 
-// 👇 Page component
+// ✅ Dynamic route page
 export default async function ProductPage({
   params,
 }: {
@@ -27,11 +26,7 @@ export default async function ProductPage({
   const product = await getProduct(params.id);
 
   if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-red-600 text-xl">
-        Product not found.
-      </div>
-    );
+    return <div>Product not found</div>;
   }
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
