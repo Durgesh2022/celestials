@@ -2,11 +2,11 @@ export const dynamic = "force-dynamic";
 import { Product } from "../../types/product";
 import Image from "next/image";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+// type Props = {
+//   params: {
+//     id: string;
+//   };
+// };
 
 async function getProduct(id: string): Promise<Product | null> {
   try {
