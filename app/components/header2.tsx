@@ -140,7 +140,7 @@ export default function ResponsiveHero() {
 
         {/* Mobile Paragraph */}
        <p
-  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight"
+  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight bg-opacity-20 p-4 rounded"
   style={{
     fontFamily: 'a Antara Distance',
     fontWeight: "400",
@@ -148,6 +148,7 @@ export default function ResponsiveHero() {
 >
   Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
 </p>
+
 
 
         {/* Mobile Button */}
