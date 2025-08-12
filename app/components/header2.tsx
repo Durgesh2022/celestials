@@ -140,7 +140,7 @@ export default function ResponsiveHero() {
 
         {/* Mobile Paragraph */}
        <p
-  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight bg-opacity-20 p-4 rounded"
+  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight bg-opacity-0.6 p-4 rounded"
   style={{
     fontFamily: 'a Antara Distance',
     fontWeight: "400",
