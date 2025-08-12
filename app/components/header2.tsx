@@ -140,7 +140,7 @@ export default function ResponsiveHero() {
 
         {/* Mobile Paragraph */}
        <p
-  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-15 leading-tight"
+  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight"
   style={{
     fontFamily: 'a Antara Distance',
     fontWeight: "400",
@@ -152,7 +152,7 @@ export default function ResponsiveHero() {
 
         {/* Mobile Button */}
         <button
-          className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300 absolute bottom-10"
+          className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300 absolute bottom-5"
           style={{
             fontFamily: 'a Antara Distance',
             fontWeight: "400",
