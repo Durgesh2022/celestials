@@ -2,11 +2,11 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link"; // ✅ Import Link
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 
 const Navbar = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
