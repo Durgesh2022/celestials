@@ -17,9 +17,16 @@ export default function Layout2() {
       <main className="flex flex-col lg:flex-row items-center justify-between px-4 py-12 md:px-16 max-w-7xl mx-auto text-[#4D5557]">
         {/* Left Content */}
         <div className="w-full lg:w-3/5 pr-0 lg:pr-12 mb-8 lg:mb-0">
-          <h1 className="text-6xl  leading-tight" style={{ fontFamily: 'Master Of Break',  fontWeight: "400",}}>
-            Transform Your Life: Discover the Power of Healing
-          </h1>
+          <h1
+  className="text-7xl mb-8 tracking-wide"
+  style={{
+    fontFamily: 'Master Of Break',
+    fontWeight: '400',
+  }}
+>
+  About Us
+</h1>
+
           
           <p className="text-3xl mb-12 text-[#4A1A11]" style={{  fontFamily: 'a Antara Distance',
            fontWeight: "400",}}>

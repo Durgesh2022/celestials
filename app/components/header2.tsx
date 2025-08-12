@@ -44,14 +44,14 @@ export default function ResponsiveHero() {
           style={{
             top: '185px',
             left: '409px',
-            width: '900px',
+            width: '950px',
             height: '200px',
             fontFamily: 'Master Of Break',
             fontWeight: "400",
           }}
         >
           Welcome to<br />
-          Celestial healing.
+          Celestials healing.
         </h1>
 
         {/* Desktop Paragraph */}
@@ -66,7 +66,7 @@ export default function ResponsiveHero() {
             fontWeight: "400",
           }}
         >
-          Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
+          Welcome to our serene space dedicated to Reiki Offerings. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
         </p>
 
         {/* Desktop Button */}
@@ -127,31 +127,32 @@ export default function ResponsiveHero() {
       <div className="lg:hidden flex flex-col items-center justify-center h-screen px-6 relative z-20">
         {/* Mobile Heading */}
         <h1
-          className="text-5xl md:text-6xl font-bold text-[#4D5557] leading-tight text-center mb-6"
+          className="text-5xl md:text-6xl font-bold text-[#4D5557] leading-tight text-center mb-6 absolute top-16 left-18"
           style={{
             fontFamily: 'Master Of Break',
             fontWeight: "400",
+            width: "400px",
           }}
         >
           Welcome to<br />
-          <span className="block">Celestial healing.</span>
+          <span className="block">Celestials healing.</span>
         </h1>
 
         {/* Mobile Paragraph */}
-        <p
-          className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl"
-          style={{
-            fontFamily: 'a Antara Distance',
-            fontWeight: "400",
-            lineHeight: '1.4',
-          }}
-        >
-          Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
-        </p>
+       <p
+  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-18 leading-tight"
+  style={{
+    fontFamily: 'a Antara Distance',
+    fontWeight: "400",
+  }}
+>
+  Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
+</p>
+
 
         {/* Mobile Button */}
         <button
-          className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300"
+          className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300 absolute bottom-13"
           style={{
             fontFamily: 'a Antara Distance',
             fontWeight: "400",
@@ -192,7 +193,7 @@ export default function ResponsiveHero() {
         /* Mobile adjustments for background images */
         @media (max-width: 1023px) {
           .pop-up {
-            opacity: .8 !important;
+            opacity: 1 !important;
           }
         }
 
