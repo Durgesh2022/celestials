@@ -49,7 +49,7 @@ const Carousel = () => {
         A wide range of services are provided to help you understand yourself better and make
         better decisions in life.
       </p>
-      <div className="flex flex-col md:flex-row w-full">
+      <div className="hidden lg:flex flex-row w-full max-w-7xl">
         <div className="w-full md:w-4/5 relative min-h-[500px]">
           <div className="relative w-full h-full flex justify-center items-center">
             {products.map((product, i) => {
@@ -85,7 +85,35 @@ const Carousel = () => {
         </div>
       </div>
 
-      <div className="w-full flex justify-center relative top-[-120px] left-[160px]">
+{/* Mobile & Tablet Layout */}
+        <div className="lg:hidden w-full max-w-2xl">
+          {/* Mobile Image Display */}
+          <div className="relative mb-8">
+            <div className="flex justify-center">
+              <img
+                src={products[activeIndex].imageSrc}
+                alt={products[activeIndex].name}
+                className="w-80 h-96 md:w-96 md:h-[450px] rounded-lg shadow-lg object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Mobile Content */}
+          <div className="text-center px-4">
+            <h2 
+              className="text-3xl md:text-4xl text-[#4A1A11] font-bold mb-4" 
+              style={{ fontFamily: 'Master Of Break', fontWeight: "400" }}
+            >
+              {products[activeIndex].name}
+            </h2>
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+              {products[activeIndex].description}
+            </p>
+          </div>
+        </div>
+
+
+      <div className="hidden lg:flex w-full justify-center relative top-[-120px] left-[160px]">
         <div className="flex space-x-2">
           <button
             onClick={prevSlide}
@@ -101,6 +129,23 @@ const Carousel = () => {
           </button>
         </div>
       </div>
+
+      {/* Dots Indicator for Mobile */}
+        <div className="flex justify-center mt-6 lg:hidden">
+          <div className="flex space-x-2">
+            {products.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === activeIndex 
+                    ? 'bg-[#4A1A11] scale-125' 
+                    : 'bg-gray-400 hover:bg-gray-600'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
     </div>
     </div>
   );
