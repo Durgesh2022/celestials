@@ -2,8 +2,11 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link"; // ✅ Import Link
 import { ChevronDown, Menu, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 const Navbar = () => {
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -162,12 +165,14 @@ const Navbar = () => {
               {isDropdownOpen && (
                 <div className="mt-2 pl-4 space-y-2">
                   <Link
-                    href="/courses"
-                    className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
-                    onClick={closeMobileMenu}
-                  >
-                    Reiki Courses
-                  </Link>
+  href="/courses"
+  className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
+  onClick={closeMobileMenu}
+>
+  Reiki Courses
+</Link>
+
+
                   <a
                     href="#"
                     className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"

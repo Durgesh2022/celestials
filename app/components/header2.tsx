@@ -127,7 +127,7 @@ export default function ResponsiveHero() {
       <div className="lg:hidden flex flex-col items-center justify-center h-screen px-6 relative z-20">
         {/* Mobile Heading */}
         <h1
-          className="text-5xl md:text-6xl font-bold text-[#4D5557] leading-tight text-center mb-6 absolute top-16 left-18"
+          className="text-5xl md:text-6xl font-bold text-[#4D5557] leading-tight text-center mb-6 absolute top-16 "
           style={{
             fontFamily: 'Master Of Break',
             fontWeight: "400",
@@ -140,7 +140,7 @@ export default function ResponsiveHero() {
 
         {/* Mobile Paragraph */}
        <p
-  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-18 leading-tight"
+  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-15 leading-tight"
   style={{
     fontFamily: 'a Antara Distance',
     fontWeight: "400",
@@ -152,7 +152,7 @@ export default function ResponsiveHero() {
 
         {/* Mobile Button */}
         <button
-          className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300 absolute bottom-13"
+          className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300 absolute bottom-10"
           style={{
             fontFamily: 'a Antara Distance',
             fontWeight: "400",
