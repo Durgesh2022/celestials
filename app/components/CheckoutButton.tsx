@@ -1,6 +1,12 @@
 import React from "react";
 import { loadRazorpayScript } from "../utils/loadRazorpay";
 
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  razorpay_signature: string;
+}
+
 interface RazorpayOptions {
   key: string;
   amount: number;
@@ -8,11 +14,26 @@ interface RazorpayOptions {
   name: string;
   description: string;
   order_id: string;
-  handler: (response: any) => void;
+  handler: (response: RazorpayResponse) => void;
   prefill: { name: string; email: string; contact: string };
-  notes?: Record<string, any>;
+  notes?: Record<string, string | number | boolean>;
   theme?: { color: string };
 }
+
+interface RazorpayInstance {
+  open: () => void;
+}
+
+interface RazorpayConstructor {
+  new (options: RazorpayOptions): RazorpayInstance;
+}
+declare global {
+  interface Window {
+    Razorpay: RazorpayConstructor;
+  }
+}
+
+
 
 const CheckoutButton: React.FC<{ amount: number }> = ({ amount }) => {
   const handlePayment = async () => {
@@ -23,7 +44,6 @@ const CheckoutButton: React.FC<{ amount: number }> = ({ amount }) => {
       return;
     }
 
-    // Create order on backend
     const orderRes = await fetch("/api/razorpay/order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,7 +53,7 @@ const CheckoutButton: React.FC<{ amount: number }> = ({ amount }) => {
     const orderData = await orderRes.json();
 
     const options: RazorpayOptions = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!, // from env
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
       amount: orderData.amount,
       currency: orderData.currency,
       name: "My Next.js Store",
@@ -43,7 +63,6 @@ const CheckoutButton: React.FC<{ amount: number }> = ({ amount }) => {
         alert(`Payment ID: ${response.razorpay_payment_id}`);
         alert(`Order ID: ${response.razorpay_order_id}`);
         alert(`Signature: ${response.razorpay_signature}`);
-        // TODO: Verify payment on backend
       },
       prefill: {
         name: "Durgesh Tiwari",
@@ -53,15 +72,12 @@ const CheckoutButton: React.FC<{ amount: number }> = ({ amount }) => {
       theme: { color: "#3399cc" },
     };
 
-    const paymentObject = new (window as any).Razorpay(options);
+    const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
 
   return (
-    <button
-      onClick={handlePayment}
-      className=""
-    >
+    <button onClick={handlePayment}>
       Buy Now
     </button>
   );

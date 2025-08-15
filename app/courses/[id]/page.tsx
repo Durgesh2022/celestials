@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import CheckoutButton from '@/app/components/CheckoutButton';
 
 type Course = {
   _id: string;
@@ -70,9 +71,9 @@ const CourseDetailPage = () => {
             </span>
           </div>
 
-          <button className="px-6 py-3 bg-[#4A1A11] text-white rounded hover:bg-gray-800 transition">
-            Register Now
-          </button>
+          <div className="mt-4 px-3 py-2 w-26 bg-[#4A1A11] text-white rounded hover:bg-gray-800 transition">
+  <CheckoutButton amount={course.discountedPrice} />
+</div>
         </div>
       </div>
     </div>
