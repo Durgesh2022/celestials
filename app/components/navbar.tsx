@@ -74,29 +74,23 @@ const Navbar = () => {
                     className="block px-4 py-3 text-[#4D5557] hover:bg-[#4A1A11] hover:text-white transition-colors"
                     onClick={() => setIsDropdownOpen(false)}
                   >
-                    Reiki Courses
+                    Reiki 
                   </Link>
                   <a
-                    href="#"
+                    href="/Astrology"
                     className="block px-4 py-3 text-[#4D5557] hover:bg-[#4A1A11] hover:text-white transition-colors"
                     onClick={() => setIsDropdownOpen(false)}
                   >
-                    Astrology Insights
+                    Astrology
                   </a>
                   <a
-                    href="#"
+                    href="/Yoga"
                     className="block px-4 py-3 text-[#4D5557] hover:bg-[#4A1A11] hover:text-white transition-colors"
                     onClick={() => setIsDropdownOpen(false)}
                   >
-                    Yoga Practices
+                    Yoga
                   </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-3 text-[#4D5557] hover:bg-[#4A1A11] hover:text-white transition-colors"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    Tarot Readings
-                  </a>
+                  
                 </div>
               )}
             </div>
@@ -151,52 +145,29 @@ const Navbar = () => {
             >
               Products
             </Link>
+             <Link
+              href="/courses"
+              className="block text-lg font-medium text-[#4D5557] py-2 border-b border-gray-100"
+              onClick={closeMobileMenu}
+            >
+              Reiki
+            </Link>
+            <Link
+              href="/Astrology"
+              className="block text-lg font-medium text-[#4D5557] py-2 border-b border-gray-100"
+              onClick={closeMobileMenu}
+            >
+              Astrology
+            </Link>
+            <Link
+              href="/Yoga"
+              className="block text-lg font-medium text-[#4D5557] py-2 border-b border-gray-100"
+              onClick={closeMobileMenu}
+            >
+              Yoga
+            </Link>
 
-            {/* Mobile Dropdown */}
-            <div className="py-2 border-b border-gray-100" ref={mobileDropdownRef}>
-              <button
-                className="flex items-center justify-between w-full text-lg font-medium text-[#4D5557]"
-                onClick={() => setIsDropdownOpen((prev) => !prev)}
-              >
-                Offerings
-                <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              {isDropdownOpen && (
-                <div className="mt-2 pl-4 space-y-2">
-                  <Link
-  href="/courses"
-  className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
-  onClick={closeMobileMenu}
->
-  Reiki Courses
-</Link>
-
-
-                  <a
-                    href="#"
-                    className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
-                    onClick={closeMobileMenu}
-                  >
-                    Astrology Insights
-                  </a>
-                  <a
-                    href="#"
-                    className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
-                    onClick={closeMobileMenu}
-                  >
-                    Yoga Practices
-                  </a>
-                  <a
-                    href="#"
-                    className="block py-2 px-2 text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
-                    onClick={closeMobileMenu}
-                  >
-                    Tarot Readings
-                  </a>
-                </div>
-              )}
-            </div>
+            
 
             {/* Mobile Action Buttons */}
             <div className="pt-4 space-y-3">

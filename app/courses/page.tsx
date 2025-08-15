@@ -1,49 +1,41 @@
-
 // app/page.tsx
-
-
-// import Header from '../components/header';
 import Header3 from '../components/header3';
 import Layout from '../components/layout';
-// import Layout2 from '../components/layout2';
-import EnrollPage from '../components/enroll';
+// import EnrollPage from '../components/enroll';
 import Team from '../components/team';
-// import Testimonial from '../components/testimonial';
-// import Layout3 from '../components/layout3';
-// import ProductCarousel from '../components/offerings';
-// import FAQs from '../components/faq';
-// import ContactForm from '../components/contactform';
-// import NewsletterSubscription from '../components/newsletter';
-// import Header2 from '../components/header2';
 import WellnessLandingPage from '../components/video';
 import Enroll2 from '../components/courses';
+import ProductsSection from '../products/ProductsSection'; // ✅ Import
+import { Product } from '../types/product';
 
-// Initialize the font
+// ✅ Fetch products server-side
+async function getProducts(): Promise<Product[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/products/all`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return data.products;
+}
 
+// ✅ Server Component (since we are fetching directly here)
+export default async function Home() {
+  const products = await getProducts();
 
-
-
-export default function Home() {
   return (
     <div>
+      <Header3 />
+      <Layout />
+      {/* <EnrollPage /> */}
+      <Enroll2 />
+      {/* 🔹 Product Section */}
+      <ProductsSection products={products} />
+      
+      
      
-       <Header3 /> 
 
-     
-      
-       <Layout /> 
-   
-       <EnrollPage />
-       <Enroll2 />
-       <WellnessLandingPage />
-      <Team />
+      <WellnessLandingPage />
        
-      {/* <Testimonial />
-      <Layout3 /> */}
-      {/* <FAQs />  
-      
-       <NewsletterSubscription /> */}
-     
+      <Team />
     </div>
   );
 }

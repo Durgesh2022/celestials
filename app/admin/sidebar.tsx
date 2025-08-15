@@ -111,7 +111,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, showToggleButton =
       {/* Sidebar overlay for mobile */}
       {isOpen && isMobile && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-[#f6cf92] bg-opacity-50 z-40"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />

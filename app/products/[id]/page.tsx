@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import CheckoutButton from '@/app/components/CheckoutButton';
 
 type Product = {
   _id: string;
@@ -76,9 +77,10 @@ const ProductClient = () => {
               Delivery Info: <span className="font-bold">{product.deliveryInfo}</span>
             </p>
 
-            <button className="mt-4 px-6 py-3 bg-[#4A1A11] text-white rounded hover:bg-gray-800 transition">
-              Add to Cart
-            </button>
+            
+<div className="mt-4 px-3 py-2 w-26 bg-[#4A1A11] text-white rounded hover:bg-gray-800 transition">
+  <CheckoutButton amount={product.priceDrop} />
+</div>
 
             <div className="mt-6 border-t pt-4">
               <h2 className="text-lg font-semibold mb-2 text-[#4D5557]">Description</h2>

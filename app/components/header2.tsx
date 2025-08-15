@@ -1,5 +1,13 @@
 'use client'
+import { useRouter } from 'next/navigation';
+
 export default function ResponsiveHero() {
+  const router = useRouter();
+
+  const handleStartJourney = () => {
+    router.push('/about');
+  };
+
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
       {/* Top Left Circle */}
@@ -8,7 +16,7 @@ export default function ResponsiveHero() {
       {/* Top Right Circle */}
       <div className="absolute top-0 right-0 w-32 h-32 md:w-48 lg:w-72 md:h-48 lg:h-72 bg-[#f6d992] opacity-30 rounded-full blur-3xl" />
 
-      {/* Background Image (Behind) */}
+      {/* Background Image */}
       <img
         src="/mandala.png"
         alt="Background Decorative Shape"
@@ -22,23 +30,23 @@ export default function ResponsiveHero() {
         }}
       />
   
-        {/* Image at x: -17px, y: 369px */}
-        <img
-          src="/women3.png"
-          alt="Decorative"
-          className="absolute z-10 pop-up"
-          style={{
-            width: '489px',
-            height: '506px',
-            top: '190px',
-            left: '-3px',
-            animationDelay: '0.4s',
-          }}
-        />
+      {/* Foreground Image */}
+      <img
+        src="/women3.png"
+        alt="Decorative"
+        className="absolute z-10 pop-up"
+        style={{
+          width: '489px',
+          height: '506px',
+          top: '190px',
+          left: '-3px',
+          animationDelay: '0.4s',
+        }}
+      />
 
       {/* Desktop Layout */}
       <div className="hidden lg:block">
-        {/* Desktop Heading */}
+        {/* Heading */}
         <h1
           className="absolute z-20 text-6xl xl:text-9xl font-bold text-[#4D5557] leading-tight"
           style={{
@@ -54,7 +62,7 @@ export default function ResponsiveHero() {
           Celestials healing.
         </h1>
 
-        {/* Desktop Paragraph */}
+        {/* Paragraph */}
         <p
           className="absolute z-20 text-2xl xl:text-3xl text-[#4A1A11]"
           style={{
@@ -69,8 +77,9 @@ export default function ResponsiveHero() {
           Welcome to our serene space dedicated to Reiki Offerings. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
         </p>
 
-        {/* Desktop Button */}
+        {/* Button */}
         <button
+          onClick={handleStartJourney}
           className="absolute z-20 mt-4 px-6 py-3 text-2xl xl:text-3xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300"
           style={{
             top: '570px',
@@ -82,7 +91,7 @@ export default function ResponsiveHero() {
           Start Your Journey
         </button>
 
-        {/* Desktop Decorative Images - Only show on large screens */}
+        {/* Decorative Images */}
         <img
           src="/1.png"
           alt="Decorative"
@@ -123,11 +132,10 @@ export default function ResponsiveHero() {
         />
       </div>
 
-      {/* Mobile/Tablet Layout */}
+      {/* Mobile Layout */}
       <div className="lg:hidden flex flex-col items-center justify-center h-screen px-6 relative z-20">
-        {/* Mobile Heading */}
         <h1
-          className="text-5xl md:text-6xl font-bold text-[#4D5557] leading-tight text-center mb-6 absolute top-16 "
+          className="text-5xl md:text-6xl font-bold text-[#4D5557] leading-tight text-center mb-6 absolute top-16"
           style={{
             fontFamily: 'Master Of Break',
             fontWeight: "400",
@@ -138,21 +146,18 @@ export default function ResponsiveHero() {
           <span className="block">Celestials healing.</span>
         </h1>
 
-        {/* Mobile Paragraph */}
-       <p
-  className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight bg-opacity-0.6 p-4 rounded"
-  style={{
-    fontFamily: 'a Antara Distance',
-    fontWeight: "400",
-  }}
->
-  Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
-</p>
+        <p
+          className="text-3xl md:text-2xl text-[#4A1A11] text-center mb-8 max-w-2xl absolute bottom-10 leading-tight bg-opacity-0.6 p-4 rounded"
+          style={{
+            fontFamily: 'a Antara Distance',
+            fontWeight: "400",
+          }}
+        >
+          Welcome to our serene space dedicated to Reiki certification. Explore our courses designed to empower your spiritual journey and enhance your healing abilities.
+        </p>
 
-
-
-        {/* Mobile Button */}
         <button
+          onClick={handleStartJourney}
           className="px-6 py-3 text-xl md:text-2xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300 absolute bottom-5"
           style={{
             fontFamily: 'a Antara Distance',
@@ -163,7 +168,7 @@ export default function ResponsiveHero() {
         </button>
       </div>
 
-      {/* Animation styles */}
+      {/* Animations */}
       <style jsx>{`
         .pop-up {
           opacity: 0;
@@ -191,19 +196,17 @@ export default function ResponsiveHero() {
           }
         }
 
-        /* Mobile adjustments for background images */
         @media (max-width: 1023px) {
           .pop-up {
-            opacity: 1 !important;
+            opacity: .9 !important;
           }
         }
 
-        /* Smooth transitions */
         button:hover {
           transform: translateY(-2px);
           box-shadow: 0 10px 30px rgba(77, 85, 87, 0.3);
         }
       `}</style>
     </div>
-  )
+  );
 }

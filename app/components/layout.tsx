@@ -16,10 +16,10 @@ export default function Layout() {
       <section className="max-w-6xl mx-auto text-center mb-16 text-[#4D5557]">
         <p className="text-lg mb-2 text-[#4A1A11]">Empower</p>
         <h1 className="font-celestial text-5xl md:text-5xl font-bold mb-6" style={{ fontFamily: "'CelestialFont', Petrona, serif",}}>
-          Transform Your Journey with Reiki Certification
+          Transform Your Journey with Our Offerings
         </h1>
         <p className="text-lg max-w-3xl mx-auto mb-8 text-[#4A1A11]">
-          Unlock your potential with our comprehensive online Reiki certification courses. 
+          Unlock your potential with our comprehensive online courses. 
           Designed for all levels, our platform ensures a fulfilling learning experience.
         </p>
       </section>
@@ -39,7 +39,7 @@ export default function Layout() {
               />
             </div>
             <h2 className="font-celestial text-2xl font-bold mb-4 text-center text-[#4D5557]" >
-              Learn from Seasoned Reiki Professionals
+              Learn from Seasoned Professionals
             </h2>
             <p className="text-center text-[#4A1A11]">
               Our instructors bring years of experience and wisdom.
@@ -77,7 +77,7 @@ export default function Layout() {
               />
             </div>
             <h2 className="font-celestial text-2xl font-bold mb-4 text-center text-[#4D5557]" >
-              Start Your Reiki Journey Today
+              Start Your Journey Today
             </h2>
             <p className="text-center text-[#4A1A11]">
               Join our community and embrace the healing arts.
