@@ -99,26 +99,26 @@ export async function POST(request: NextRequest) {
     return response;
 
   } catch (error) {
-    console.error('Signup error:', error);
-    
-    // Handle MongoDB duplicate key error
-    if (error.code === 11000) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          message: 'Email already exists',
-          errors: [{ field: 'email', message: 'An account with this email already exists' }]
-        },
-        { status: 409 }
-      );
-    }
+  console.error('Signup error:', error);
 
+  // Handle MongoDB duplicate key error safely
+  if (typeof error === 'object' && error !== null && 'code' in error && (error as any).code === 11000) {
     return NextResponse.json(
       { 
         success: false, 
-        message: 'Internal server error' 
+        message: 'Email already exists',
+        errors: [{ field: 'email', message: 'An account with this email already exists' }]
       },
-      { status: 500 }
+      { status: 409 }
     );
   }
+
+  return NextResponse.json(
+    { 
+      success: false, 
+      message: 'Internal server error' 
+    },
+    { status: 500 }
+  );
+}
 }
