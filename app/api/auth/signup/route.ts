@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {connectToDatabase} from '@/lib/mongodb';
+import { connectToDatabase } from '@/lib/mongodb';
 import User from '@/models/User';
 import { hashPassword, generateTokens, generateVerificationToken } from '@/lib/auth';
 import { validateSignupData, SignupData } from '@/lib/validation';
+
+// Helper type guard for Mongo duplicate key errors
+function isMongoDuplicateKeyError(err: unknown): err is { code: number } {
+  return typeof err === 'object' && err !== null && 'code' in err && typeof (err as { code: unknown }).code === 'number';
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,11 +41,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Hash password
+    // Hash password and create verification token
     const hashedPassword = await hashPassword(body.password);
     const verificationToken = generateVerificationToken();
 
-    // Create user
     const newUser = new User({
       firstName: body.firstName.trim(),
       lastName: body.lastName.trim(),
@@ -48,12 +52,11 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
       subscribeNewsletter: body.subscribeNewsletter || false,
       verificationToken,
-      isVerified: false // Set to true if you don't want email verification
+      isVerified: false
     });
 
     await newUser.save();
 
-    // Generate JWT tokens
     const { accessToken, refreshToken } = generateTokens({
       userId: newUser._id.toString(),
       email: newUser.email,
@@ -62,7 +65,6 @@ export async function POST(request: NextRequest) {
       isVerified: newUser.isVerified,
     });
 
-    // Create response
     const response = NextResponse.json({
       success: true,
       message: 'Account created successfully',
@@ -71,7 +73,6 @@ export async function POST(request: NextRequest) {
         firstName: newUser.firstName,
         lastName: newUser.lastName,
         email: newUser.email,
-        // fullName: newUser.fullName,
         subscribeNewsletter: newUser.subscribeNewsletter,
         isVerified: newUser.isVerified,
         createdAt: newUser.createdAt,
@@ -79,12 +80,11 @@ export async function POST(request: NextRequest) {
       token: accessToken,
     }, { status: 201 });
 
-    // Set HTTP-only cookies
     response.cookies.set('auth-token', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60, // 7 days
+      maxAge: 7 * 24 * 60 * 60,
       path: '/',
     });
 
@@ -92,33 +92,29 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 30 * 24 * 60 * 60, // 30 days
+      maxAge: 30 * 24 * 60 * 60,
       path: '/',
     });
 
     return response;
 
-  } catch (error) {
-  console.error('Signup error:', error);
+  } catch (error: unknown) {
+    console.error('Signup error:', error);
 
-  // Handle MongoDB duplicate key error safely
-  if (typeof error === 'object' && error !== null && 'code' in error && (error as any).code === 11000) {
+    if (isMongoDuplicateKeyError(error) && error.code === 11000) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Email already exists',
+          errors: [{ field: 'email', message: 'An account with this email already exists' }]
+        },
+        { status: 409 }
+      );
+    }
+
     return NextResponse.json(
-      { 
-        success: false, 
-        message: 'Email already exists',
-        errors: [{ field: 'email', message: 'An account with this email already exists' }]
-      },
-      { status: 409 }
+      { success: false, message: 'Internal server error' },
+      { status: 500 }
     );
   }
-
-  return NextResponse.json(
-    { 
-      success: false, 
-      message: 'Internal server error' 
-    },
-    { status: 500 }
-  );
-}
 }
