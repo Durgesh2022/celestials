@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
         firstName: newUser.firstName,
         lastName: newUser.lastName,
         email: newUser.email,
-        fullName: newUser.fullName,
+        // fullName: newUser.fullName,
         subscribeNewsletter: newUser.subscribeNewsletter,
         isVerified: newUser.isVerified,
         createdAt: newUser.createdAt,
