@@ -11,6 +11,10 @@ interface User {
   email: string;
   isVerified: boolean;
 }
+interface GetCurrentUserResponse {
+  success: boolean;
+  user?: User;
+}
 
 const Navbar = () => {
   // const router = useRouter();
@@ -25,6 +29,7 @@ const Navbar = () => {
   const isAdmin = user?.email === "twdurgesh226@gmail.com";
   const isLoggedIn = !!user;
 
+  
   // Check authentication status on component mount
   useEffect(() => {
     const checkAuthStatus = async () => {

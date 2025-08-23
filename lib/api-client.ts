@@ -1,5 +1,5 @@
 // lib/api-client.ts
-interface ApiResponse<T = unknown> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
   user?: T;
@@ -22,6 +22,13 @@ export interface LoginData {
   rememberMe: boolean;
 }
 
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  isVerified: boolean;
+}
+
 class ApiClient {
   private baseUrl: string;
 
@@ -30,26 +37,25 @@ class ApiClient {
   }
 
   private async request<T>(
-    endpoint: string, 
+    endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
     const url = `${this.baseUrl}/api${endpoint}`;
-    
+
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers,
+        ...(options.headers || {}),
       },
-      credentials: 'include', // Important for cookies
+      credentials: 'include',
       ...options,
     };
 
-    // Add auth token if available (for authorization header)
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('auth-token');
       if (token) {
         config.headers = {
-          ...config.headers,
+          ...(config.headers as Record<string, string>),
           Authorization: `Bearer ${token}`,
         };
       }
@@ -58,16 +64,15 @@ class ApiClient {
     try {
       const response = await fetch(url, config);
       const data = await response.json();
-      
-      // Store token in localStorage if provided
+
       if (data.token && typeof window !== 'undefined') {
         localStorage.setItem('auth-token', data.token);
       }
-      
+
       return {
         success: data.success,
         message: data.message,
-        user: data.user,
+        user: data.user as T | undefined,
         token: data.token,
         errors: data.errors,
       };
@@ -81,50 +86,44 @@ class ApiClient {
     }
   }
 
-  async signup(data: SignupData): Promise<ApiResponse> {
-    return this.request('/auth/signup', {
+  // If your API returns the created user, keep ApiResponse<User>. If not, change to ApiResponse<null>.
+  async signup(data: SignupData): Promise<ApiResponse<User>> {
+    return this.request<User>('/auth/signup', {
       method: 'POST',
       body: JSON.stringify(data),
     });
   }
 
-  async login(data: LoginData): Promise<ApiResponse> {
-    return this.request('/auth/login', {
+  // Most auth APIs return { user, token }
+  async login(data: LoginData): Promise<ApiResponse<User>> {
+    return this.request<User>('/auth/login', {
       method: 'POST',
       body: JSON.stringify(data),
     });
   }
 
-  async logout(): Promise<ApiResponse> {
-    const response = await this.request('/auth/logout', {
-      method: 'POST',
-    });
-    
-    // Clear token from localStorage
+  async logout(): Promise<ApiResponse<null>> {
+    const response = await this.request<null>('/auth/logout', { method: 'POST' });
+
     if (typeof window !== 'undefined') {
       localStorage.removeItem('auth-token');
     }
-    
     return response;
   }
 
-  async getCurrentUser(): Promise<ApiResponse> {
-    return this.request('/auth/me');
+  async getCurrentUser(): Promise<ApiResponse<User>> {
+    return this.request<User>('/auth/me');
   }
 
-  async refreshToken(): Promise<ApiResponse> {
-    return this.request('/auth/refresh', {
-      method: 'POST',
-    });
+  async refreshToken(): Promise<ApiResponse<User>> {
+    return this.request<User>('/auth/refresh', { method: 'POST' });
   }
 
-  // Helper method to check if user is authenticated
   isAuthenticated(): boolean {
     if (typeof window === 'undefined') return false;
     return !!localStorage.getItem('auth-token');
   }
 
-  // Helper method to clear authentication
   clearAuth(): void {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('auth-token');
