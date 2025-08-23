@@ -11,6 +11,14 @@ const CourseCard = ({ product }: Props) => {
       <div className="w-full relative cursor-pointer">
         <div className="gradient-border-wrapper aspect-[5/5] w-[300px] mx-auto rounded-full p-1">
           <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden bg-white p-4 flex flex-col items-center justify-center text-center group">
+            {/* Small Circular Image */}
+            {product.imageUrls?.[0] && (
+              <img
+                src={product.imageUrls[0]}
+                alt={product.title}
+                className="w-20 h-20 rounded-full object-cover mb-2"
+              />
+            )}
             <div className="transition duration-300 group-hover:blur-sm">
               <h2 className="text-lg font-semibold text-black">{product.title}</h2>
               <p className="text-sm text-[#4A1A11] truncate">{product.description}</p>

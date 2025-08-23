@@ -8,6 +8,7 @@ const CourseSchema = new Schema(
     originalPrice: { type: Number, required: true },
     discountedPrice: { type: Number, required: true },
     imageUrls: { type: [String], default: [] },
+    fields: { type: [String], default: [] }, // Add fields array
   },
   { timestamps: true }
 );

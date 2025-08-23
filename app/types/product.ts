@@ -7,4 +7,5 @@ export type Product = {
   priceDrop: number;
   imageUrls: string[];
   price: number;
+  fields?: string[];
 };

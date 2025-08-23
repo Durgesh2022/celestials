@@ -8,6 +8,7 @@ type CourseFormData = {
   bulletPoints: string[];
   originalPrice: string;
   discountedPrice: string;
+  fields: string[]; // Add fields array
 };
 
 const CourseForm = () => {
@@ -17,12 +18,15 @@ const CourseForm = () => {
     bulletPoints: [''],
     originalPrice: '',
     discountedPrice: '',
+    fields: [], // Initialize empty fields array
   });
 
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  // Available field options
+  const fieldOptions = ['Reiki', 'Astrology', 'Yoga'];
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -37,6 +41,15 @@ const CourseForm = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  // Handle field selection (checkbox)
+  const handleFieldChange = (field: string) => {
+    const updatedFields = formData.fields.includes(field)
+      ? formData.fields.filter(f => f !== field)
+      : [...formData.fields, field];
+    
+    setFormData({ ...formData, fields: updatedFields });
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,54 +74,54 @@ const CourseForm = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setSuccessMessage(null); // Clear any previous messages
+    e.preventDefault();
+    setSuccessMessage(null); // Clear any previous messages
 
-  try {
-    const base64Images = await Promise.all(
-      images.map((file) => {
-        return new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = (err) => reject(err);
-        });
-      })
-    );
+    try {
+      const base64Images = await Promise.all(
+        images.map((file) => {
+          return new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = (err) => reject(err);
+          });
+        })
+      );
 
-    const courseData = {
-      ...formData,
-      images: base64Images,
-    };
+      const courseData = {
+        ...formData,
+        images: base64Images,
+      };
 
-    const res = await fetch("/api/courses/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(courseData),
-    });
-
-     await res.json();
-
-    if (res.ok) {
-      setSuccessMessage("🎉 Course added successfully!");
-      setFormData({
-        title: '',
-        description: '',
-        bulletPoints: [''],
-        originalPrice: '',
-        discountedPrice: '',
+      const res = await fetch("/api/courses/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(courseData),
       });
-      setImages([]);
-      setImagePreviews([]);
-    } else {
-      setSuccessMessage("❌ Failed to add product. Please try again.");
-    }
-  } catch (err) {
-    console.error("Error submitting course:", err);
-    setSuccessMessage("Something went wrong while submitting the course.");
-  }
-};
 
+      await res.json();
+
+      if (res.ok) {
+        setSuccessMessage("🎉 Course added successfully!");
+        setFormData({
+          title: '',
+          description: '',
+          bulletPoints: [''],
+          originalPrice: '',
+          discountedPrice: '',
+          fields: [], // Reset fields
+        });
+        setImages([]);
+        setImagePreviews([]);
+      } else {
+        setSuccessMessage("❌ Failed to add course. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error submitting course:", err);
+      setSuccessMessage("Something went wrong while submitting the course.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f6cf92] to-white py-10 px-4 text-[#4A1A11]">
@@ -131,9 +144,34 @@ const CourseForm = () => {
           />
         </div>
 
+        {/* Fields Section */}
+        <div>
+          <label className="block font-semibold mb-2">Course Categories</label>
+          <div className="flex flex-wrap gap-4">
+            {fieldOptions.map((field) => (
+              <label key={field} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={formData.fields.includes(field)}
+                  onChange={() => handleFieldChange(field)}
+                  className="w-4 h-4 text-[#4A1A11] border-gray-300 rounded focus:ring-[#4A1A11]"
+                />
+                <span className="text-sm font-medium">{field}</span>
+              </label>
+            ))}
+          </div>
+          {formData.fields.length > 0 && (
+            <div className="mt-2">
+              <span className="text-sm text-gray-600">
+                Selected: {formData.fields.join(', ')}
+              </span>
+            </div>
+          )}
+        </div>
+
         {/* Image Upload */}
         <div>
-          <label className="block text-lg font-medium mb-2">Upload Product Images</label>
+          <label className="block text-lg font-medium mb-2">Upload Course Images</label>
           <input
             type="file"
             multiple
@@ -231,18 +269,19 @@ const CourseForm = () => {
           </button>
         </div>
       </form>
+      
       {/* Success / Error Message */}
-          {successMessage && (
-            <div
-              className={`mt-6 p-4 rounded-lg shadow-md text-center border transition-all duration-300 ${
-                successMessage.includes("successfully")
-                  ? "bg-green-100 text-green-800 border-green-300"
-                  : "bg-red-100 text-red-800 border-red-300"
-              }`}
-            >
-              {successMessage}
-            </div>
-          )}
+      {successMessage && (
+        <div
+          className={`mt-6 p-4 rounded-lg shadow-md text-center border transition-all duration-300 ${
+            successMessage.includes("successfully")
+              ? "bg-green-100 text-green-800 border-green-300"
+              : "bg-red-100 text-red-800 border-red-300"
+          }`}
+        >
+          {successMessage}
+        </div>
+      )}
     </div>
   );
 };

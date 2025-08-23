@@ -8,7 +8,7 @@ import { uploadToCloudinary } from "@/lib/cloudinary";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, description, deliveryInfo, onSale, priceDrop, images } = body;
+    const { name, description, deliveryInfo, onSale, price, priceDrop, images, fields } = body; // ✅ added price
 
     await connectToDatabase();
 
@@ -17,11 +17,13 @@ export async function POST(req: Request) {
     );
 
     const newProduct = new Product({
-     name,
+      name,
       description,
       deliveryInfo,
       onSale,
+      price, // ✅ added price
       priceDrop,
+      fields,
       imageUrls: uploadedImages,
     });
 
@@ -30,6 +32,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, product: newProduct }, { status: 201 });
   } catch (error) {
     console.error("Error adding product:", error);
-    return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

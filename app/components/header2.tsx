@@ -24,7 +24,7 @@ export default function ResponsiveHero() {
         style={{
           width: '686px',
           height: '686px',
-          top: '30px',
+          top: '10px',
           left: '-110px',
           animationDelay: '0s',
         }}
@@ -38,7 +38,7 @@ export default function ResponsiveHero() {
         style={{
           width: '489px',
           height: '506px',
-          top: '190px',
+          top: '140px',
           left: '-3px',
           animationDelay: '0.4s',
         }}
@@ -48,7 +48,7 @@ export default function ResponsiveHero() {
       <div className="hidden lg:block">
         {/* Heading */}
         <h1
-          className="absolute z-20 text-6xl xl:text-9xl font-bold text-[#4D5557] leading-tight"
+          className="absolute z-20 text-5xl xl:text-8xl font-bold text-[#4D5557] leading-tight"
           style={{
             top: '185px',
             left: '409px',
@@ -66,7 +66,7 @@ export default function ResponsiveHero() {
         <p
           className="absolute z-20 text-2xl xl:text-3xl text-[#4A1A11]"
           style={{
-            top: '500px',
+            top: '450px',
             left: '425px',
             width: '900px',
             height: '105px',
@@ -82,7 +82,7 @@ export default function ResponsiveHero() {
           onClick={handleStartJourney}
           className="absolute z-20 mt-4 px-6 py-3 text-2xl xl:text-3xl font-semibold text-white bg-[#4D5557] hover:bg-[#32120b] rounded-full shadow-lg transition duration-300"
           style={{
-            top: '570px',
+            top: '525px',
             left: '425px',
             fontFamily: 'a Antara Distance',
             fontWeight: "400",
@@ -99,7 +99,7 @@ export default function ResponsiveHero() {
           style={{
             width: '180px',
             height: '220px',
-            top: '40px',
+            top: '10px',
             right: '65px',
             animationDelay: '0.2s',
           }}
@@ -112,7 +112,7 @@ export default function ResponsiveHero() {
           style={{
             width: '152px',
             height: '229px',
-            top: '220px',
+            top: '170px',
             right: '105px',
             animationDelay: '0.6s',
           }}
@@ -125,7 +125,7 @@ export default function ResponsiveHero() {
           style={{
             width: '180px',
             height: '220px',
-            top: '110px',
+            top: '80px',
             right: '215px',
             animationDelay: '0.4s',
           }}

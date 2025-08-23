@@ -4,6 +4,7 @@ export type Product = {
   description: string;
   imageUrls: string[]; // Cloudinary image URLs
   bulletPoints?: string[];
+  fields?: string[]; // Add optional fields array
   originalPrice?: number;
   discountedPrice?: number;
 };

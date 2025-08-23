@@ -1,7 +1,6 @@
 "use client";
 import { useState, ChangeEvent } from "react";
 
-
 const AddProduct = () => {
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
@@ -9,8 +8,12 @@ const AddProduct = () => {
   const [description, setDescription] = useState("");
   const [deliveryInfo, setDeliveryInfo] = useState("");
   const [onSale, setOnSale] = useState("No");
+  const [price, setPrice] = useState(0); // ✅ new state
   const [priceDrop, setPriceDrop] = useState(0);
   const [successMessage, setSuccessMessage] = useState("");
+
+  // ✅ New state for fields
+  const [fields, setFields] = useState<string[]>([]);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -23,6 +26,13 @@ const AddProduct = () => {
       );
       setImagePreviews(previews);
     }
+  };
+
+  // ✅ Handle checkbox toggle
+  const handleCheckboxChange = (field: string) => {
+    setFields((prev) =>
+      prev.includes(field) ? prev.filter((f) => f !== field) : [...prev, field]
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +54,9 @@ const AddProduct = () => {
       description,
       deliveryInfo,
       onSale,
+      price, // ✅ include price
       priceDrop,
+      fields,
       images: base64Images,
     };
 
@@ -64,9 +76,10 @@ const AddProduct = () => {
       setDescription("");
       setDeliveryInfo("");
       setOnSale("No");
+      setPrice(0); // ✅ reset
       setPriceDrop(0);
+      setFields([]); // ✅ reset checkboxes
 
-      // hide message after 4 seconds
       setTimeout(() => setSuccessMessage(""), 4000);
     } else {
       setSuccessMessage("❌ Failed to add product. Please try again.");
@@ -75,7 +88,6 @@ const AddProduct = () => {
 
   return (
     <div className="flex min-h-screen bg-[#f6cf92] text-black border border-[#4A1A11]">
-      {/* Form Content */}
       <div className="flex-1 p-6">
         <div className="max-w-4xl mx-auto text-[#4A1A11]">
           <h1 className="text-4xl font-bold mb-8">ADD PRODUCTS</h1>
@@ -134,6 +146,42 @@ const AddProduct = () => {
               />
             </div>
 
+            {/* ✅ New Checkboxes */}
+            <div>
+              <label className="block text-lg font-medium mb-2">
+                Select Fields
+              </label>
+              <div className="flex gap-6">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={fields.includes("Reiki")}
+                    onChange={() => handleCheckboxChange("Reiki")}
+                    className="mr-2"
+                  />
+                  Reiki
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={fields.includes("Astrology")}
+                    onChange={() => handleCheckboxChange("Astrology")}
+                    className="mr-2"
+                  />
+                  Astrology
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={fields.includes("Yoga")}
+                    onChange={() => handleCheckboxChange("Yoga")}
+                    className="mr-2"
+                  />
+                  Yoga
+                </label>
+              </div>
+            </div>
+
             {/* Delivery Info */}
             <div>
               <label className="block text-lg font-medium mb-1">
@@ -161,6 +209,18 @@ const AddProduct = () => {
               </select>
             </div>
 
+            {/* ✅ Price */}
+            <div>
+              <label className="block text-lg font-medium mb-1">Price</label>
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
+                placeholder="Enter product price"
+                className="w-full border px-4 py-2 rounded-md"
+              />
+            </div>
+
             {/* Price Drop */}
             <div>
               <label className="block text-lg font-medium mb-1">
@@ -170,6 +230,7 @@ const AddProduct = () => {
                 type="number"
                 value={priceDrop}
                 onChange={(e) => setPriceDrop(Number(e.target.value))}
+                placeholder="Enter discount (amount or %)"
                 className="w-full border px-4 py-2 rounded-md"
               />
             </div>

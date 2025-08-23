@@ -8,7 +8,7 @@ type Props = {
 
 const CourseSection = ({ products }: Props) => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-white to-[#f6cf92] overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
       <section className="py-10 px-4 max-w-7xl mx-auto">
         <h1
           className="text-5xl font-bold mb-10 text-[#4D5557] text-center"

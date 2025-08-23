@@ -13,6 +13,7 @@ export async function POST(req: Request) {
       originalPrice,
       discountedPrice,
       images,
+      fields, // Add fields to destructuring
     } = body;
 
     await connectToDatabase();
@@ -29,6 +30,7 @@ export async function POST(req: Request) {
       originalPrice,
       discountedPrice,
       imageUrls: uploadedImages,
+      fields, // Add fields to the new course
     });
 
     await newCourse.save();

@@ -1,16 +1,56 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import Link from "next/link"; // ✅ Import Link
+import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
-// import { useRouter } from "next/navigation";
+import { apiClient } from "@/lib/api-client"; // Adjust path as needed
+import { useRouter } from "next/navigation";
 
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  isVerified: boolean;
+}
 
 const Navbar = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
   const dropdownRef = useRef<HTMLDivElement>(null);
-  // const mobileDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Check if user is admin (email is twdurgesh@gmail.com)
+  const isAdmin = user?.email === "twdurgesh226@gmail.com";
+  const isLoggedIn = !!user;
+
+  // Check authentication status on component mount
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      setIsLoading(true);
+      try {
+        if (apiClient.isAuthenticated()) {
+          const response = await apiClient.getCurrentUser();
+          if (response.success && response.user) {
+            setUser(response.user);
+          } else {
+            // Clear invalid token
+            apiClient.clearAuth();
+            setUser(null);
+          }
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        apiClient.clearAuth();
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuthStatus();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,6 +71,29 @@ const Navbar = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      setIsLoading(true);
+      const response = await apiClient.logout();
+      if (response.success) {
+        setUser(null);
+        // Optionally redirect to home page
+        // router.push('/');
+      } else {
+        console.error('Logout failed:', response.message);
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleLoginClick = () => {
+    router.push('/Login');
+  };
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
@@ -76,21 +139,20 @@ const Navbar = () => {
                   >
                     Reiki 
                   </Link>
-                  <a
+                  <Link
                     href="/Astrology"
                     className="block px-4 py-3 text-[#4D5557] hover:bg-[#4A1A11] hover:text-white transition-colors"
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     Astrology
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/Yoga"
                     className="block px-4 py-3 text-[#4D5557] hover:bg-[#4A1A11] hover:text-white transition-colors"
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     Yoga
-                  </a>
-                  
+                  </Link>
                 </div>
               )}
             </div>
@@ -98,14 +160,44 @@ const Navbar = () => {
 
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/admin">
-              <button className="px-4 py-2 border-2 border-[#4D5557] text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors">
-                Admin
+            {/* User greeting if logged in */}
+            {isLoggedIn && !isLoading && (
+              <span className="text-sm text-[#4D5557]">
+                Hi, {user.firstName}!
+              </span>
+            )}
+
+            {/* Show Admin button only if user is logged in with twdurgesh@gmail.com */}
+            {isAdmin && (
+              <Link href="/admin">
+                <button className="px-4 py-2 border-2 border-[#4D5557] text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors">
+                  Admin
+                </button>
+              </Link>
+            )}
+            
+            {/* Login/Logout button */}
+            {isLoading ? (
+              <button 
+                disabled
+                className="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
+              >
+                Loading...
               </button>
-            </Link>
-            <button className="px-4 py-2 bg-[#4D5557] text-white rounded-md hover:bg-[#32120b] transition-colors">
-              Login
-            </button>
+            ) : isLoggedIn ? (
+              <button 
+                onClick={handleLogout}
+                className="px-4 py-2 bg-[#4D5557] text-white rounded-md hover:bg-[#32120b] transition-colors"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link href="/login">
+                <button className="px-4 py-2 bg-[#4D5557] text-white rounded-md hover:bg-[#32120b] transition-colors">
+                  Login
+                </button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -124,6 +216,13 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200 shadow-lg">
           <div className="px-4 py-4 space-y-4">
+            {/* User greeting in mobile */}
+            {isLoggedIn && !isLoading && (
+              <div className="text-sm text-[#4D5557] py-2 border-b border-gray-100">
+                Hi, {user.firstName}!
+              </div>
+            )}
+
             <Link
               href="/"
               className="block text-lg font-medium text-[#4D5557] py-2 border-b border-gray-100"
@@ -145,7 +244,7 @@ const Navbar = () => {
             >
               Products
             </Link>
-             <Link
+            <Link
               href="/courses"
               className="block text-lg font-medium text-[#4D5557] py-2 border-b border-gray-100"
               onClick={closeMobileMenu}
@@ -167,24 +266,48 @@ const Navbar = () => {
               Yoga
             </Link>
 
-            
-
             {/* Mobile Action Buttons */}
             <div className="pt-4 space-y-3">
-              <Link href="/admin" className="block w-full">
+              {/* Show Admin button only if user is logged in with twdurgesh@gmail.com */}
+              {isAdmin && (
+                <Link href="/admin" className="block w-full">
+                  <button
+                    className="w-full px-4 py-3 border-2 border-[#4D5557] text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    Admin
+                  </button>
+                </Link>
+              )}
+              
+              {/* Login/Logout button */}
+              {isLoading ? (
                 <button
-                  className="w-full px-4 py-3 border-2 border-[#4D5557] text-[#4D5557] rounded-md hover:bg-[#4D5557] hover:text-white transition-colors"
-                  onClick={closeMobileMenu}
+                  disabled
+                  className="w-full px-4 py-3 bg-gray-400 text-white rounded-md cursor-not-allowed"
                 >
-                  Admin
+                  Loading...
                 </button>
-              </Link>
-              <button
-                className="w-full px-4 py-3 bg-[#4D5557] text-white rounded-md hover:bg-[#32120b] transition-colors"
-                onClick={closeMobileMenu}
-              >
-                Login
-              </button>
+              ) : isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    closeMobileMenu();
+                  }}
+                  className="w-full px-4 py-3 bg-[#4D5557] text-white rounded-md hover:bg-[#32120b] transition-colors"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link href="/Login" className="block w-full">
+                  <button
+                    onClick={closeMobileMenu}
+                    className="w-full px-4 py-3 bg-[#4D5557] text-white rounded-md hover:bg-[#32120b] transition-colors"
+                  >
+                    Login
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
