@@ -87,11 +87,11 @@ UserSchema.virtual('fullName').get(function (this: IUser) {
 // Ensure virtual fields are serialized
 UserSchema.set('toJSON', {
   virtuals: true,
-  transform: function (doc, ret) {
-    delete ret.password;
-    delete ret.__v;
-    return ret;
-  }
+  transform: function (ret: Partial<IUser> & { __v?: number }) {
+  delete ret.password;
+  delete ret.__v;
+  return ret;
+}
 });
 
 const User: Model<IUser> =
