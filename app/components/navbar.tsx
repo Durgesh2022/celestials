@@ -11,10 +11,7 @@ interface User {
   email: string;
   isVerified: boolean;
 }
-interface GetCurrentUserResponse {
-  success: boolean;
-  user?: User;
-}
+
 
 const Navbar = () => {
   // const router = useRouter();
