@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { apiClient, SignupData } from '@/lib/api-client';
+import { apiClient } from '@/lib/api-client';
 
 export default function SignUpPage() {
   const router = useRouter();

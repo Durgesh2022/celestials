@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { apiClient } from "@/lib/api-client"; // Adjust path as needed
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 interface User {
   firstName: string;
@@ -13,7 +13,7 @@ interface User {
 }
 
 const Navbar = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -91,9 +91,7 @@ const Navbar = () => {
     }
   };
 
-  const handleLoginClick = () => {
-    router.push('/Login');
-  };
+  
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 

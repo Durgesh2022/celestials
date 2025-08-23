@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { apiClient, LoginData } from '@/lib/api-client';
+import { apiClient } from '@/lib/api-client';
 
 
 export default function LoginPage() {
@@ -84,15 +84,7 @@ export default function LoginPage() {
     router.push('/forgot-password');
   };
 
-  const handleGoogleLogin = () => {
-    // Handle Google login
-    console.log('Google login clicked');
-  };
-
-  const handleFacebookLogin = () => {
-    // Handle Facebook login
-    console.log('Facebook login clicked');
-  };
+ 
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#f6cf92] to-white overflow-hidden">
