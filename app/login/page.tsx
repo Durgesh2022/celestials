@@ -225,17 +225,16 @@ export default function LoginPage() {
            
 
             {/* Sign Up Link */}
-            <div className="mt-6 text-center">
-              <p className="text-[#4A1A11]" style={{ fontFamily: 'a Antara Distance' }}>
-                Don't have an account?{' '}
-                <button
-                  onClick={handleSignUpClick}
-                  className="text-[#4D5557] font-semibold hover:underline transition duration-300"
-                >
-                  Sign Up
-                </button>
-              </p>
-            </div>
+            <p className="text-[#4A1A11]" style={{ fontFamily: 'a Antara Distance' }}>
+  Don&apos;t have an account?{' '}
+  <button
+    onClick={handleSignUpClick}
+    className="text-[#4D5557] font-semibold hover:underline transition duration-300"
+  >
+    Sign Up
+  </button>
+</p>
+
           </div>
         </div>
       </div>

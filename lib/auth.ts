@@ -39,7 +39,7 @@ export function generateTokens(payload: Omit<JWTPayload, 'iat' | 'exp'>) {
 export function verifyToken(token: string): JWTPayload | null {
   try {
     return jwt.verify(token, JWT_SECRET) as JWTPayload;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

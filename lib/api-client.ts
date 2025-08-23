@@ -1,5 +1,5 @@
 // lib/api-client.ts
-interface ApiResponse<T = any> {
+interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
   user?: T;
